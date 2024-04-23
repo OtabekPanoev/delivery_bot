@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 public class MyBot extends TelegramLongPollingBot {
 
-    Executor executor = Executors.newFixedThreadPool(200);
+    Executor executor = Executors.newFixedThreadPool(20);
     private MyBotService myBotService = new MyBotService(this);
     public MyBot(String botToken) {
         super(botToken);
