@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class Category {
-    private String name; // u
-    private Integer number;
-    private String url;
+public class OrderProduct {
+    private Integer id;
+    private Integer productId;
+    private Integer amount;
+    private Integer orderId;
 }

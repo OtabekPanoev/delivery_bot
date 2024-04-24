@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class Product {
+public class Order {
     private Integer id; // u
-    private String categoryId;
-    private String name;
-    private String url;
-    private Long price;
-    private Boolean isActive = Boolean.TRUE;
-
+    private Long userId;
+    private Long deliveryPrice;
+    private Long actualPrice;
+    private Integer addressId;
+    private String desc;
 }

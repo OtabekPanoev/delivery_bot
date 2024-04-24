@@ -1,24 +1,44 @@
 package uz.pdp.bot;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import uz.pdp.model.User;
+import uz.pdp.model.enams.UserState;
+import uz.pdp.service.UserService;
+import uz.pdp.utils.GlobalVar;
 
 public class MyBotService {
-    private final TelegramLongPollingBot bot;
-
-    public MyBotService(TelegramLongPollingBot bot) {
-        this.bot = bot;
-    }
+    private final MyBot bot;
+    private final UserService userService = UserService.getInstance();
+    public MyBotService(MyBot bot) {this.bot = bot;}
 
     public void onUpdateReceived(Update update) throws Exception {
-        Message message = update.getMessage();
 
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(message.getChatId());
-        sendMessage.setText("Bot Thread" + Thread.currentThread().getName());
+        GlobalVar.setMyBot(bot);
 
-        bot.execute(sendMessage);
+        Message message;
+        if (update.hasMessage()) {
+            message = update.getMessage();
+        } else if (update.hasCallbackQuery()) {
+            message = update.getCallbackQuery().getMessage();
+            message.setText(update.getCallbackQuery().getData());
+        } else return;
+
+        User user = userService.userVerify(message.getChatId());
+        GlobalVar.setUSER(user);
+
+        cases(update, message, user.getUserState());
     }
+
+    private void cases(Update update, Message message, UserState userState) {
+        switch (userState) {
+            case USER_STARTED -> userService.userStarted(update, message);
+            default -> {
+                return;
+            }
+        }
+    }
+
+
 }
