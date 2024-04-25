@@ -34,6 +34,8 @@ public class MyBotService {
     private void cases(Update update, Message message, UserState userState) {
         switch (userState) {
             case USER_STARTED -> userService.userStarted(update, message);
+            case CHOOSE_LANGUAGE -> userService.setUserLang(update, message);
+            case SHARE_PHONE_NUMBER -> userService.setPhoneNumber(update, message);
             default -> {
                 return;
             }

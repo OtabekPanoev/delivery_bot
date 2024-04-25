@@ -5,7 +5,7 @@
     "fio": null,
     "phoneNumber": null,
     "role": "USER",
-    "lang": null,
-    "userState": "CHOOSE_LANGUAGE"
+    "lang": "UZ",
+    "userState": "SHARE_PHONE_NUMBER"
   }
 ]
