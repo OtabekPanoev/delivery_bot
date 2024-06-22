@@ -55,10 +55,9 @@ public class UserRepository implements BaseRepository<User, Long> {
 
     @NonNull
     private List<User> getAllUsersFromFile() {
-        List<User> users = FileHelper.load(FileUrls.USER_URL, new TypeToken<List<User>>(){}.getType());
-        return users == null ? new ArrayList<>() : users;
+        return null;
     }
     private void setAllUsersFromFile(List<User> users) {
-        FileHelper.write(FileUrls.USER_URL, users);
+        return;
     }
 }
