@@ -9,7 +9,6 @@ public class TestJDBC {
 
         insert();
 
-
     }
 
     private static void insert() {
